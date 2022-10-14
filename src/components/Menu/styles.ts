@@ -1,6 +1,5 @@
 import styled from "styled-components"
 import { colors } from "styles/GlobalStyle"
-
 export const Cabecalho = styled.header`
   display: flex;
   background-color: ${colors.primary};

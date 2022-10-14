@@ -1,9 +1,15 @@
 import React from "react";
 import logo from "assets/img/logo.png"
 import * as S from "./styles";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "hooks/authHook";
 const Menu = () => {
+  const { user, signOut } = useAuth()
+  const navigate = useNavigate();
+  async function logout() {
+    await signOut()
+    navigate('/login')
+  }
   return (
     <S.Cabecalho>
       <picture>
