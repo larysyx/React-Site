@@ -3,8 +3,9 @@ export interface IReceitaData {
   titulo: string,
   receita: string,
   topico: {
-    tipo: string
-  }
+    item: string
+    id: number
+  }[]
 }
 
 export interface IReceitaForm {

@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import imgprincipal from "assets/img/imgprincipal.png";
 import * as S from "./styles";
 import { CardComponent } from "components";
-import dados from "services/dados";
+import { IReceitaData } from "interfaces/receitas.interface";
+import { apiReceitas } from "services/data";
 
 const Home = () => {
+  const [dados, setdados] = useState<IReceitaData[]>()
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await apiReceitas.index()
+      setdados(response.data)
+    }
+    fetchData()
+  }, [])
   return (
     <S.Home>
       <picture>

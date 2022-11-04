@@ -1,7 +1,7 @@
 export interface ICard {
   dados: {
     id: number,
-    nome: string,
+    titulo: string,
     receita: string,
     topico: {
       id: number,

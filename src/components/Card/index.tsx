@@ -9,8 +9,8 @@ const Card = ({ dados }: ICard) => {
       {dados && (
         <div key={dados.id}>
           <section>
-            <h2>{dados.nome}</h2>
-            <h4>{dados.mensagem}</h4>
+            <h2>{dados.titulo}</h2>
+            <h4>{dados.receita}</h4>
             <div>
               {dados.topico.map((topic) => (
                 <span key={topic.id}>{topic.item}</span>
