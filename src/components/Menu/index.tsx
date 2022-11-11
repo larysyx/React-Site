@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "assets/img/logo.png"
+import {GrLogout} from "react-icons/gr"
 import * as S from "./styles";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "hooks/authHook";
@@ -14,22 +15,33 @@ const Menu = () => {
     <S.Cabecalho>
       <picture>
         <Link to="/">
-          <img src={logo} alt="imagem logo"/>
+          <img src = {logo} />
         </Link>
       </picture>
       <nav>
-        <ul>
-          <li>
-            <section>            
-              <Link to="/login">Login</Link>
-            </section>
-          </li>
-          <li>
-            <Link to="/cadastrar">Cadastre-se</Link>
-          </li>
-        </ul>
+        {
+          user ? (
+            <ul>
+              <li>
+                <Link to="/adm/Receita">Receita</Link>
+              </li>
+              <li>
+                <button onClick={logout}>{user.name} <GrLogout /></button>
+              </li>
+            </ul>
+          ) : (
+            <ul>
+              <li>
+                <Link to="/login">Login</Link>
+              </li>
+              <li>
+                <Link to="/cadastrar">Cadastrar</Link>
+              </li>
+            </ul>
+          )
+        }
       </nav>
-    </S.Cabecalho>
+    </S.Cabecalho >
   );
 };
 

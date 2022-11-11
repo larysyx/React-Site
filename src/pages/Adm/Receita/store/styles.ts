@@ -13,7 +13,7 @@ export const Section = styled.section`
     border-radius: 0.5rem;
     padding: 1.5rem;
     margin-top: 6rem;
-    > svg {
+     svg {
       display: flex;
       height: 4rem;
       width: 4rem;
