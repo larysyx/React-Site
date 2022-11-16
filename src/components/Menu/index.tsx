@@ -23,7 +23,7 @@ const Menu = () => {
           user ? (
             <ul>
               <li>
-                <Link to="/adm/Receita">Receita</Link>
+                <Link to="/adm/receitas">Receita</Link>
               </li>
               <li>
                 <button onClick={logout}>{user.name} <GrLogout /></button>

@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { CadastrarPage, HomePage, LayoutPage, LoginPage, AdmPage, AdmReceitaPage, AdmReceitaStorePage } from "pages";
+import { CadastrarPage, HomePage, LayoutPage, LoginPage, AdmReceitaPage, AdmReceitaStorePage } from "pages";
 import ProtectedRoute from "./ProtectedRoute";
 
 const Rotas = () => {

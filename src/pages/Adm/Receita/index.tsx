@@ -62,7 +62,7 @@ const AdmReceita = () => {
               <ButtonComponent
                 bgColor="add"
                 type="button"
-                onClick={() => navigate("/adm/ReceitasetReceita/0")}
+                onClick={() => navigate("/adm/Receita/0")}
               >
                 <FcAddDatabase />
               </ButtonComponent>

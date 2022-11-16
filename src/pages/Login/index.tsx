@@ -38,21 +38,25 @@ const Login = () => {
   }
   return (
     <S.Section>
-      <form action="cadastrar.html" method="post">
+      <form method="post" onSubmit={handleSubmit}>
         <FaUserAlt/>
         <label htmlFor="email">E-mail</label>
         <div>
           <MdEmail />
-          <input type="email" name="email" id="email" placeholder="E-mail" />
+          <input type="email" name="email" id="email" placeholder="E-mail" 
+          onChange={(e) => handleChange({ email: e.target.value })}
+          value={formData?.email}/>
         </div>
         <label htmlFor="senha">Senha</label>
         <div>
           <FaKey />
-          <input type="password" name="senha" id="senha" placeholder="Senha" />
+          <input type="password" name="senha" id="senha" placeholder="Senha"
+           onChange={(e) => handleChange({ password: e.target.value })}
+           value={formData?.password} />
         </div>
         <p>
           Não possui conta? <Link to="/cadastrar">Cadastre-se</Link>
-          <ButtonComponent>Entrar</ButtonComponent>
+          <ButtonComponent> Entrar </ButtonComponent>
         </p>
       </form>
     </S.Section>
