@@ -57,12 +57,12 @@ const AdmReceita = () => {
         <LoadingComponent />
       ) : (
         <>
-          <S.Section>
+          <S.Main>
             <div>
               <ButtonComponent
                 bgColor="add"
                 type="button"
-                onClick={() => navigate("/adm/Receita/0")}
+                onClick={() => navigate("/adm/receitas/0")}
               >
                 <FcAddDatabase />
               </ButtonComponent>
@@ -106,7 +106,7 @@ const AdmReceita = () => {
                   ))}
               </tbody>
             </table>
-          </S.Section>
+          </S.Main>
         </>
       )}
     </>

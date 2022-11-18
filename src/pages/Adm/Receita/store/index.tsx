@@ -16,6 +16,7 @@ const ReceitaStore = () => {
   const [formData, setFormData] = useState<IReceitaForm>({
     titulo: '',
     receita: '',
+    topic: []
   })
   const { id } = useParams<{ id: string }>();
 
@@ -46,14 +47,33 @@ const ReceitaStore = () => {
     setFormData((state: IReceitaForm | undefined) => ({ ...state, ...e }))
   }
 
+
+  async function handleCheck(e: string) {
+    let topic = formData.topic ? formData.topic : []
+    if (formData.topic?.includes(Number(e))) {
+      topic = formData.topic.filter((i) => i !== Number(e))
+    } else {
+      topic.push(Number(e))
+    }
+    setFormData((state: IReceitaForm) => ({ ...state, topic }))
+  }
+
   useEffect(() => {
+    const loadTopics = async () => {
+      try {
+        const response = await apiTopic.index()
+        setTopics(response.data)
+      } catch (error) {
+        console.log(error);
+      }
+    }
     if (Number(id) > 0) {
       const fetchData = async (id: number) => {
         try {
           const response = await apiReceitas.show(id);
           setFormData({
             ...response.data,
-            topic: response.data.topico?.map((i) => i.id)
+            topic: response.data.receitaTopic?.map((i) => i.id)
           });
         } catch (error) {
           console.log(error);
@@ -61,6 +81,7 @@ const ReceitaStore = () => {
       };
       fetchData(Number(id));
     }
+    loadTopics()
     setIsLoading(false);
   }, [id]);
 
@@ -70,7 +91,7 @@ const ReceitaStore = () => {
         <LoadingComponent />
       ) : (
         <>
-          <S.Section>
+          <S.Main>
             <form method="POST" onSubmit={handleSubmit}>
               <Link to="/adm/Receita">
                 <FcUndo /> Voltar
@@ -90,12 +111,17 @@ const ReceitaStore = () => {
                 />
               </div>
               <div>
+                <label htmlFor="Tipo">Tipo: </label>
+                <textarea id="Tipo" placeholder="Informe o tipo de sua receita" required
+                  onChange={(e) => handleChange({ topic: e.target.value })}
+                  value={formData?.topic}
+                />
               </div>
               <ButtonComponent bgColor="add" type="submit">
                 Enviar <FcDatabase />
               </ButtonComponent>
             </form>
-          </S.Section>
+          </S.Main>
         </>
       )}
     </>
