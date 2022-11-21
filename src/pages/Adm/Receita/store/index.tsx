@@ -3,10 +3,11 @@ import * as S from "./styles";
 import { LoadingComponent, ButtonComponent } from "components";
 import { FcDatabase, FcUndo } from "react-icons/fc";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { apiReceitas} from "services/data";
+import { apiReceitas, apiTopic} from "services/data";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { IReceitaData, IReceitaForm } from "interfaces/receitas.interface";
+import { ITopicData } from "interfaces/topic.interface";
 import { IErrorResponse } from "interfaces/user.interface";
 
 const ReceitaStore = () => {
@@ -111,11 +112,19 @@ const ReceitaStore = () => {
                 />
               </div>
               <div>
-                <label htmlFor="Tipo">Tipo: </label>
-                <textarea id="Tipo" placeholder="Informe o tipo de sua receita" required
-                  onChange={(e) => handleChange({ topic: e.target.value })}
-                  value={formData?.topic}
-                />
+                <label>Tópicos:</label>
+                <div>
+                  {topics && topics.map((i) => (
+                    <div key={i.id}><>
+                      <input type="checkbox" id={`topic${i.id}`} name="topics[]"
+                        onChange={(e) => handleCheck(e.target.value)}
+                        value={i.id}
+                        checked={formData?.topic?.includes(Number(i.id))}
+                      />
+                      <label htmlFor={`topic${i.id}`}>{i.name}</label>
+                    </></div>
+                  ))}
+                </div>
               </div>
               <ButtonComponent bgColor="add" type="submit">
                 Enviar <FcDatabase />
