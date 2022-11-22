@@ -72,7 +72,7 @@ const AdmReceita = () => {
                 <tr>
                   <th>Título</th>
                   <th>Receita</th>
-                  <th>Tópico</th>
+                  <th>Tipo</th>
                   <th>Editar</th>
                   <th>Remover</th>
                 </tr>
@@ -83,7 +83,7 @@ const AdmReceita = () => {
                     <tr key={item.id}>
                       <td>{item.titulo}</td>
                       <td>{item.receita}</td>
-                      <td>{item.topico?.map((i) => `${i.item} `)}</td>
+                      <td>{item.tipo}</td>
                       <td>
                         <ButtonComponent
                           type="button"

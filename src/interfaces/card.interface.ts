@@ -3,9 +3,6 @@ export interface ICard {
     id: number,
     titulo: string,
     receita: string,
-    topico: {
-      id: number,
-      item: string
-    }[]
+    tipo: string
   }
 }

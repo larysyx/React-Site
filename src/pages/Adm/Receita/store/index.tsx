@@ -3,21 +3,18 @@ import * as S from "./styles";
 import { LoadingComponent, ButtonComponent } from "components";
 import { FcDatabase, FcUndo } from "react-icons/fc";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { apiReceitas, apiTopic} from "services/data";
+import { apiReceitas} from "services/data";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { IReceitaData, IReceitaForm } from "interfaces/receitas.interface";
-import { ITopicData } from "interfaces/topic.interface";
 import { IErrorResponse } from "interfaces/user.interface";
 
 const ReceitaStore = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [topics, setTopics] = useState<IReceitaData[]>()
   const navigate = useNavigate();
   const [formData, setFormData] = useState<IReceitaForm>({
     titulo: '',
     receita: '',
-    topic: []
   })
   const { id } = useParams<{ id: string }>();
 
@@ -32,7 +29,7 @@ const ReceitaStore = () => {
         await apiReceitas.store(formData);
         toast.success("Receita cadastrada com sucesso!");
       }
-      navigate('/adm/Receita')
+      navigate('/adm/receitas')
     } catch (error) {
       const err = error as AxiosError<IErrorResponse>
       let messages = err.response?.data.message
@@ -48,33 +45,13 @@ const ReceitaStore = () => {
     setFormData((state: IReceitaForm | undefined) => ({ ...state, ...e }))
   }
 
-
-  async function handleCheck(e: string) {
-    let topic = formData.topic ? formData.topic : []
-    if (formData.topic?.includes(Number(e))) {
-      topic = formData.topic.filter((i) => i !== Number(e))
-    } else {
-      topic.push(Number(e))
-    }
-    setFormData((state: IReceitaForm) => ({ ...state, topic }))
-  }
-
   useEffect(() => {
-    const loadTopics = async () => {
-      try {
-        const response = await apiTopic.index()
-        setTopics(response.data)
-      } catch (error) {
-        console.log(error);
-      }
-    }
     if (Number(id) > 0) {
       const fetchData = async (id: number) => {
         try {
           const response = await apiReceitas.show(id);
           setFormData({
             ...response.data,
-            topic: response.data.receitaTopic?.map((i) => i.id)
           });
         } catch (error) {
           console.log(error);
@@ -82,7 +59,6 @@ const ReceitaStore = () => {
       };
       fetchData(Number(id));
     }
-    loadTopics()
     setIsLoading(false);
   }, [id]);
 
@@ -94,7 +70,7 @@ const ReceitaStore = () => {
         <>
           <S.Main>
             <form method="POST" onSubmit={handleSubmit}>
-              <Link to="/adm/Receita">
+              <Link to="/adm/receitas">
                 <FcUndo /> Voltar
               </Link>
               <div>
@@ -112,19 +88,11 @@ const ReceitaStore = () => {
                 />
               </div>
               <div>
-                <label>Tópicos:</label>
-                <div>
-                  {topics && topics.map((i) => (
-                    <div key={i.id}><>
-                      <input type="checkbox" id={`topic${i.id}`} name="topics[]"
-                        onChange={(e) => handleCheck(e.target.value)}
-                        value={i.id}
-                        checked={formData?.topic?.includes(Number(i.id))}
-                      />
-                      <label htmlFor={`topic${i.id}`}>{i.name}</label>
-                    </></div>
-                  ))}
-                </div>
+                <label htmlFor="Tipo">Tipo: </label>
+                <textarea id="Tipo" placeholder="Escreva o tipo da receita" required
+                  onChange={(e) => handleChange({ tipo: e.target.value })}
+                  value={formData?.tipo}
+                />
               </div>
               <ButtonComponent bgColor="add" type="submit">
                 Enviar <FcDatabase />
