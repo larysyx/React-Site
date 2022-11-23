@@ -18,6 +18,7 @@ export const colors = {
   thirdLight: "#ffe9ca",
   white: "#ffffff",
   black: "#000000",
-  success: "2C11A",
-  danger: "C31111",
+  success: "#15cc40",
+  danger: "#C31111",
+  button: "##f5961b",
 }

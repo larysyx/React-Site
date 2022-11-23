@@ -4,12 +4,12 @@ import * as S from "./styles";
 import { apiReceitas } from "services/data";
 import { IReceitaData } from "interfaces/receitas.interface";
 import { LoadingComponent } from "components";
-import { FcAddDatabase } from "react-icons/fc";
 import { BsPencilSquare, BsTrash2 } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { confirmAlert } from "react-confirm-alert";
 import { toast } from "react-toastify";
 import Receita from "services/data/Receita";
+import { HiOutlineViewGridAdd } from "react-icons/hi";
 
 const AdmReceita = () => {
   const [receitas, setReceitas] = useState<IReceitaData[]>();
@@ -64,7 +64,7 @@ const AdmReceita = () => {
                 type="button"
                 onClick={() => navigate("/adm/receitas/0")}
               >
-                <FcAddDatabase />
+                <HiOutlineViewGridAdd />
               </ButtonComponent>
             </div>
             <table>

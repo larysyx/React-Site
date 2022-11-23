@@ -1,13 +1,14 @@
 import { FormEvent, useEffect, useState } from "react";
 import * as S from "./styles";
 import { LoadingComponent, ButtonComponent } from "components";
-import { FcDatabase, FcUndo } from "react-icons/fc";
+import { FcUndo } from "react-icons/fc";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { apiReceitas} from "services/data";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { IReceitaData, IReceitaForm } from "interfaces/receitas.interface";
 import { IErrorResponse } from "interfaces/user.interface";
+import { AiOutlineSend } from "react-icons/ai";
 
 const ReceitaStore = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -24,7 +25,7 @@ const ReceitaStore = () => {
         console.log(Number(id))
       if (Number(id) > 0) {
         await apiReceitas.update(Number(id), formData);
-        toast.success("Rceita alterada com sucesso!");
+        toast.success("Receita alterada com sucesso!");
       } else {
         await apiReceitas.store(formData);
         toast.success("Receita cadastrada com sucesso!");
@@ -95,7 +96,7 @@ const ReceitaStore = () => {
                 />
               </div>
               <ButtonComponent bgColor="add" type="submit">
-                Enviar <FcDatabase />
+                Enviar <AiOutlineSend />
               </ButtonComponent>
             </form>
           </S.Main>

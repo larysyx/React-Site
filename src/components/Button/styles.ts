@@ -8,8 +8,8 @@ const colorVariations = {
     outline: 0.2rem outset ${colors.primary};
   `,
   add: css`
-    background-color: ${colors.white};
-    outline: 0.2rem outset ${colors.white};
+    background-color: ${colors.button};
+    outline: 0.2rem outset ${colors.primary};
   `,
   edit: css`
     background-color: ${colors.success};

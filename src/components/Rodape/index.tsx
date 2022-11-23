@@ -6,7 +6,7 @@ const Rodape = () => {
   return (
     <S.Rodape>
       <div className="content">
-        <a href="https://instagram.com" target="_blank" rel="noreferrer">
+        <a href="https://instagram.com/llemos_3" target="_blank" rel="noreferrer">
           <BsInstagram />
         </a>
         <a href="https://pinterest.com" target="_blank" rel="noreferrer">
